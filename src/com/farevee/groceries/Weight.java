@@ -43,4 +43,12 @@ public class Weight
   {
     return this.amount;
   } // amount()
+  
+  /**
+   * Returns a string representation of the weight. (amount + abbrev)
+   */
+  public String toString()
+  {
+    return this.amount() + ' ' + this.unit().abbrev();
+  } // toString()
 } // class Weight
