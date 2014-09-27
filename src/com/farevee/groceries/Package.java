@@ -54,7 +54,7 @@ public class Package
   @Override
   public String toString()
   {
-    return this.weight.toString() + " pacake " + this.name;
+    return this.weight.toString() + " pacake of " + this.name;
   } // toString()
   
 } // class Package
