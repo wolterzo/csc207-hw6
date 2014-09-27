@@ -35,7 +35,7 @@ public class TruncatedBlock
   public String row(int i)
     throws Exception
   {
-    if (i > this.height())
+    if (i > this.height() || i < 0)
       {
         throw new Exception("Invalid row " + i);
       } // if invalid row

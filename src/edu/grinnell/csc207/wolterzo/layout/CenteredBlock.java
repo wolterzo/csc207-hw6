@@ -39,8 +39,8 @@ public class CenteredBlock
 
   /**
    * Returns the ith row of the CenteredBlock. If the original text cannot 
-   * be perfectly centered, there will be one more space at before the 
-   * original row than after.
+   * be perfectly centered, there will be one more space after the original 
+   * row than after. 
    * @param i, an int
    * @exception if given an i bigger than the height
    * @return the given row, a String
@@ -48,26 +48,18 @@ public class CenteredBlock
   public String row(int i)
     throws Exception
   {
-    if (i > this.contents.height())
+    if (i > this.contents.height() || i < 0)
       {
         throw new Exception("Invalid row " + i);
       } // if invalid row
     else
       {
-        StringBuffer result = new StringBuffer();
+        //StringBuffer result = new StringBuffer();
         int numStartSpace = (this.entireWidth - this.contents.width()) / 2;
         int numEndSpace =
             this.entireWidth - this.contents.width() - numStartSpace;
-        for (int j = 0; j < numStartSpace; j++)
-          {
-            result.append(' ');
-          } // for (add start space)
-        result.append(this.contents.row(i));
-         for (int j = 0; j < numEndSpace; j++)
-           {
-             result.append(' ');
-           } // for (add end space)
-        return result.toString();
+        return TBUtils.spaces(numStartSpace) + this.contents.row(i)
+               + TBUtils.spaces(numEndSpace);
       } // else
   } // row(int)
 

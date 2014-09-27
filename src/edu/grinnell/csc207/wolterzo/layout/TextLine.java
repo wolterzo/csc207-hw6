@@ -66,5 +66,14 @@ public class TextLine
   {
     return this.line.length();
   } // width()
+  
+  /**
+   * Change the contents of the line to newContents
+   * @param newContents, a String
+   */
+  public void setContents(String newContents)
+  {
+    this.line = newContents;
+  } // setContents(String)
 
 } // class TextLine
