@@ -54,4 +54,34 @@ public class ManyPackages
            + type.name;
   } // toString()
   
+  /**
+   * Determines if this has fields equal to the feilds of other, a 
+   * ManyPackages object
+   * @param other
+   * @return boolean
+   */
+  public boolean equals(ManyPackages other)
+  {
+    return this.type.equals(other.type) && (this.count == other.count);
+  } // equals(ManyPackages)
+  
+  /**
+   * Determines if this is equal to other, an Object
+   */
+  public boolean equals(Object other)
+  {
+    if (this == other)
+      {
+        return true;
+      } // if
+    else if (other instanceof ManyPackages) 
+    {
+      return this.equals((ManyPackages) other);
+    } // else if
+    else
+      {
+        return false;
+      } // else
+  } // equals(Object)
+  
 } // class ManyPackages

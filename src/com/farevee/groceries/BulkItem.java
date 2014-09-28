@@ -64,7 +64,7 @@ public class BulkItem
    */
   public boolean equals(BulkItem obj)
   {
-    return (obj.food == this.food) && (obj.unit == this.unit)
+    return (obj.food.equals(this.food)) && (obj.unit.equals(this.unit))
            && (obj.amount == this.amount);
   } // equals(BulkItem)
 

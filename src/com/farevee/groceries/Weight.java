@@ -51,4 +51,31 @@ public class Weight
   {
     return this.amount() + ' ' + this.unit().abbrev();
   } // toString()
+  
+  /**
+   * Determines if this has fields equal to other, a Weight Object.
+   */
+  public boolean equals(Weight other)
+  {
+    return this.unit.equals(other.unit) && this.amount == other.amount;
+  } // equals(Weight)
+  
+  /**
+   * Determines if this is equal to other, an object
+   */
+  public boolean equals(Object other)
+  {
+    if (this == other)
+      {
+        return true;
+      }
+    else if (other instanceof Weight)
+      {
+        return this.equals((Weight) other);
+      } // else if
+    else
+      {
+        return false;
+      } // else
+  } // equals(Object)
 } // class Weight

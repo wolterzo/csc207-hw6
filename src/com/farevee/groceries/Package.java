@@ -18,7 +18,7 @@ public class Package
    * Price of the package
    */
   int price;
-  
+
   // +--------------+------------------------------------------------------
   // | Constructors |
   // +--------------+
@@ -47,7 +47,7 @@ public class Package
   {
     return this.price;
   } // getPrice()
-  
+
   /**
    * Determine the String representation of Package
    */
@@ -56,5 +56,35 @@ public class Package
   {
     return this.weight.toString() + " pacake of " + this.name;
   } // toString()
-  
+
+  /**
+   * Determine if this is equal to other, a Package
+   * @param other
+   * @return a boolean
+   */
+  public boolean equals(Package other)
+  {
+    return (other.name.equals(this.name)) && (other.weight.equals(this.weight))
+           && (other.price == this.price);
+  } // equals(Package)
+
+  /**
+   * Determine if this is equal to other, an object
+   */
+  public boolean equals(Object other)
+  {
+    if (this == other)
+      {
+        return true;
+      } // if
+    else if (other instanceof Package)
+      {
+        return this.equals((Package) other);
+      } // else if
+    else
+      {
+        return false;
+      } // else
+  } // equals(Object)
+
 } // class Package
