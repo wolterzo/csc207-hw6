@@ -58,7 +58,7 @@ public class Weight
    */
   public String toString()
   {
-    return this.amount + this.unit().abbrev();
+    return this.amount + " " + this.unit().abbrev();
   } // toString()
   
   /**

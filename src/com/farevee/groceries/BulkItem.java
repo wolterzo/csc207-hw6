@@ -54,7 +54,7 @@ public class BulkItem
    */
   public String toString()
   {
-    return this.amount + " " + this.unit.name + "s of " + this.food.name + "s";
+    return this.amount + " " + this.unit.name + "s of " + this.food.name;
   } // ToString()
 
   /**
