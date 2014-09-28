@@ -3,11 +3,28 @@ package com.farevee.groceries;
 public class BulkContainer
     extends BulkItem
 {
+  // +--------+------------------------------------------------------------
+  // | Fields |
+  // +--------+
+  /**
+   * Container the BulkItem is in.
+   */
+  String container;
 
-  public BulkContainer(BulkFood food, Units unit, int amount)
+  // +--------------+------------------------------------------------------
+  // | Constructors |
+  // +--------------+
+  public BulkContainer(String container, BulkFood food, Units unit, int amount)
   {
     super(food, unit, amount);
-    // TODO Auto-generated constructor stub
-  }
-
-}
+    this.container = container;
+  } // BulkContainer(String, BulkFood, Units, int)
+  
+  // +---------+-----------------------------------------------------------
+  // | Methods |
+  // +---------+  
+  public String toString()
+  {
+    return this.container + " of " + super.toString();
+  } // toString()
+} // class BulkContainer
