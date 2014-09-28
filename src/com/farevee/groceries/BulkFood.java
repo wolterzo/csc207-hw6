@@ -28,13 +28,12 @@ public class BulkFood
   // +--------------+------------------------------------------------------
   // | Constructors |
   // +--------------+
-  public BulkFood(String name, Units unit, int pricePerUnit, int supply)
+  public BulkFood(String name, Units unit, int pricePerUnit)
   {
     this.name = name;
     this.unit = unit;
     this.pricePerUnit = pricePerUnit;
-    this.supply = supply;
-  } // BulkFood
+  } // BulkFood(String, Units, int)
   
   // +---------+-----------------------------------------------------------
   // | Methods |
