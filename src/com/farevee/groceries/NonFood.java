@@ -50,6 +50,14 @@ public class NonFood
   } // getPrice()
 
   /**
+   * Determines the name of the item
+   */
+  public String getName()
+  {
+    return this.name;
+  } // getName()
+  
+  /**
    * Returns a string representation of the item
    */
   public String toString()

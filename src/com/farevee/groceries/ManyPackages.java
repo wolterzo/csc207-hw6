@@ -55,7 +55,39 @@ public class ManyPackages
   } // toString()
   
   /**
-   * Determines if this has fields equal to the feilds of other, a 
+   * Determines the name of the ManyPackages
+   */
+  public String getName()
+  {
+    return this.type.name;
+  } // getName()
+  
+  /**
+   * Determines the amount of packages grouped together
+   */
+  public int count()
+  {
+    return this.count;
+  } // count
+  
+  /**
+   * Determines the type of Package there are many of.
+   */
+  public Package packageType()
+  {
+    return this.type;
+  } // packageType()
+  
+  /**
+   * Add a number Packages that are the same type as in ManyPackages
+   */
+  public void addPackage(int amount)
+  {
+    this.count += amount;
+  } // addPackage
+  
+  /**
+   * Determines if this has fields equal to the fields of other, a 
    * ManyPackages object
    * @param other
    * @return boolean

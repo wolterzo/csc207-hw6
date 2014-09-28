@@ -58,6 +58,38 @@ public class BulkItem
   } // ToString()
 
   /**
+   * Determines the name of the BulkItem
+   */
+  public String getName()
+  {
+    return this.food.name;
+  } // getName()
+  
+  /**
+   * Determine the BulkFood that BulkItem is
+   */
+  public BulkFood food()
+  {
+    return this.food;
+  } // food()
+  
+  /**
+   * Determine the unit of the BulkItem
+   */
+  public Units units()
+  {
+    return this.unit;
+  } // units()
+  
+  /**
+   * Determine the amount of the BulkItem
+   */
+  public int amount()
+  {
+    return this.amount;
+  } // amount()
+  
+  /**
    * Determines if this and a BulkItem have equal fields
    * @param obj, a BulkItem
    * @return a boolean

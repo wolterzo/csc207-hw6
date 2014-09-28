@@ -45,11 +45,20 @@ public class Weight
   } // amount()
   
   /**
+   * Adds a specified amount to the weight
+   * @param amount, and int
+   */
+  public void addWeight(int amount)
+  {
+    this.amount += amount;
+  } // addWeight(int)
+    
+  /**
    * Returns a string representation of the weight. (amount + abbrev)
    */
   public String toString()
   {
-    return this.amount() + ' ' + this.unit().abbrev();
+    return this.amount + this.unit().abbrev();
   } // toString()
   
   /**

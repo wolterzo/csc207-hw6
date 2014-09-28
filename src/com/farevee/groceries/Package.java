@@ -47,14 +47,22 @@ public class Package
   {
     return this.price;
   } // getPrice()
-
+  
+  /**
+   * Determines the name of the Package
+   */
+  public String getName()
+  {
+    return this.name;
+  } // getName()
+  
   /**
    * Determine the String representation of Package
    */
   @Override
   public String toString()
   {
-    return this.weight.toString() + " pacake of " + this.name;
+    return this.weight.toString() + " package of " + this.name;
   } // toString()
 
   /**

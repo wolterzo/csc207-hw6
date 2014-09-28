@@ -25,4 +25,9 @@ public interface Item
    */
   public String toString();
   
+  /**
+   * Determines the name of the Item
+   */
+  public String getName();
+  
 } // interface Item
