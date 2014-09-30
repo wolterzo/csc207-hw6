@@ -162,6 +162,9 @@ public class Cart
 
   /**
    * Finds identical items and merges them into a single item.
+   * 
+   * **Doesn't work, for some reason it's not getting into any of the 
+   * conditionals.**
    */
   public void merge()
   {
@@ -174,7 +177,7 @@ public class Cart
         for (int j = i + 1; j < items.size(); j++)
           {
             item2 = items.get(j);
-
+            //check if item1 is a Package
             if (item1 instanceof Package)
               {
                 if (item1.equals(item2))
@@ -227,9 +230,7 @@ public class Cart
                 items.remove(i);
                 i--;
               } // else if item1 and item2 are a BulkItem of the same BulkFood
-          } // for
-      } // for
-
+          } // for (item2)
+      } // for (item1)
   } // merge()
-
 } // class Cart
