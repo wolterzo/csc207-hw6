@@ -32,11 +32,13 @@ public class CartExpt
     Item jello = new Package("cherry jello", new Weight(Units.OUNCE, 6), 340);
     Item jellos = new ManyPackages((Package) jello, 8);
     Item bear = new NonFood("Teddy bear", new Weight(Units.KILOGRAM, 1), 1000);
-
+    Item saffrons = new BulkContainer("jar", saffron, Units.GRAM, 2);
+    
     myCart.addItem(bear);
     myCart.addItem(jello);
     myCart.addItem(jellos);
     myCart.addItem(someBananas);
+    myCart.addItem(saffrons);
     myCart.printContents(pen);
     
     pen.println("Number of things: " + myCart.numThings());
@@ -46,9 +48,13 @@ public class CartExpt
     myCart.merge();
     myCart.printContents(pen);
     pen.println("Number of things: " + myCart.numThings());
-    pen.println("Number of entries: " + myCart.numEntries());
     
-    pen.println((jello instanceof Package));
+    Weight[] weights = myCart.getWeight();
+    
+    for (int i = 0; i < weights.length; i++)
+      {
+        pen.println(weights[i].toString());
+      }
     
 
   } // main(String[])
