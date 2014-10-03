@@ -1,14 +1,23 @@
 package com.farevee.shopping;
 
 import java.io.PrintWriter;
-import java.util.LinkedList;
+
+import java.util.ArrayList;
 
 import com.farevee.groceries.BulkItem;
 import com.farevee.groceries.Item;
+import com.farevee.groceries.Package;
 import com.farevee.groceries.ManyPackages;
 import com.farevee.groceries.Units;
 import com.farevee.groceries.Weight;
 
+/**
+ * Cart of groceries. 
+ * @author wolterzo
+ * @author Sam Rebelsky
+ * @author students in review session on 10/2/14
+ *
+ */
 public class Cart
 {
   // +--------+------------------------------------------------------------
@@ -17,16 +26,32 @@ public class Cart
   /**
    * Linked list that contains the items in the cart.
    */
-  LinkedList<Item> items;
+  ArrayList<Item> items;
 
   // +--------------+------------------------------------------------------
   // | Constructors |
   // +--------------+
   public Cart()
   {
-    this.items = new LinkedList<Item>();
+    this.items = new ArrayList<Item>();
   } // Cart()
-  
+
+  // +---------+-----------------------------------------------------------
+  // | Helpers |
+  // +---------+  
+
+  /**
+   * Remove the jth item in the card, putting the last value in 
+   * position j.  Return the new length.
+   */
+  int replace(int j)
+  {
+    int last = this.items.size() - 1;
+    this.items.set(j, this.items.get(last));
+    this.items.remove(last);
+    return last;
+  } // replace(int)
+
   // +---------+-----------------------------------------------------------
   // | Methods |
   // +---------+  
@@ -46,8 +71,8 @@ public class Cart
   public int numThings()
   {
     int count = 0;
-    LinkedList<Item> items = this.items;
-    for (int i = 0; i < items.size(); i++)
+    int len = items.size();
+    for (int i = 0; i < len; i++)
       {
         if (items.get(i) instanceof ManyPackages)
           {
@@ -76,8 +101,8 @@ public class Cart
    */
   public void printContents(PrintWriter pen)
   {
-    LinkedList<Item> items = this.items;
-    for (int i = 0; i < items.size(); i++)
+    int len = items.size();
+    for (int i = 0; i < len; i++)
       {
         pen.println(items.get(i).toString());
       } // for
@@ -90,9 +115,9 @@ public class Cart
    */
   public int getPrice()
   {
-    LinkedList<Item> items = this.items;
     int total = 0;
-    for (int i = 0; i < items.size(); i++)
+    int len = items.size();
+    for (int i = 0; i < len; i++)
       {
         total = total + items.get(i).getPrice();
       } // for
@@ -114,10 +139,10 @@ public class Cart
         new Weight[] { new Weight(Units.GRAM, 0),
                       new Weight(Units.KILOGRAM, 0),
                       new Weight(Units.OUNCE, 0), new Weight(Units.POUND, 0) };
-    LinkedList<Item> items = this.items;
     Weight currWeight;
+    int len = items.size();
     // add weights to appropriate place in the array
-    for (int i = 0; i < items.size(); i++)
+    for (int i = 0; i < len; i++)
       {
         currWeight = items.get(i).getWeight();
 
@@ -147,34 +172,32 @@ public class Cart
    */
   public void remove(String name)
   {
-    LinkedList<Item> items = this.items;
     Item currItem;
-    for (int i = 0; i < items.size(); i++)
+    int len = items.size();
+    for (int i = 0; i < len; i++)
       {
         currItem = items.get(i);
         if (currItem.getName().equals(name))
           {
             items.remove(i);
             i--;
+            len--;
           } // if
       } // for
   } // remove(String)
 
   /**
    * Finds identical items and merges them into a single item.
-   * 
-   * **Doesn't work, for some reason it's not getting into any of the 
-   * conditionals.**
    */
   public void merge()
   {
-    LinkedList<Item> items = this.items;
     Item item1;
     Item item2;
-    for (int i = 0; i < items.size(); i++)
+    int len = items.size();
+    for (int i = 0; i < len; i++)
       {
         item1 = items.get(i);
-        for (int j = i + 1; j < items.size(); j++)
+        for (int j = i + 1; j < len; j++)
           {
             item2 = items.get(j);
             //check if item1 is a Package
@@ -182,39 +205,37 @@ public class Cart
               {
                 if (item1.equals(item2))
                   {
-                    items.set(j,
-                              new ManyPackages(
-                                               (com.farevee.groceries.Package) item1,
-                                               2));
-                    items.remove(i);
-                    i--;
+                    // Merge the ith and jth items.
+                    items.set(i, new ManyPackages((Package) item1, 2));
+                    // Drop the jth item and replace it by the last item
+                    len = replace(j);
                   } // if item1 == item2
                 else if (item2 instanceof ManyPackages
                          && item1.equals(((ManyPackages) item2).packageType()))
                   {
                     ((ManyPackages) item2).addPackage(1);
-                    items.remove(i);
-                    i--;
+                    // Make item1 the new compound package
+                    item1 = item2;
+                    items.set(i, item2);
+                    // And move the lasts item to the newly freed space
+                    len = replace(j);
                   } // else if item2.type == item1
               } // if item1 is a Package
+
             else if (item1 instanceof ManyPackages)
               {
-                if (((ManyPackages) item1).packageType().equals(item2))
+                ManyPackages mp1 = (ManyPackages) item1;
+                // item2 is a package stored in item1
+                if (mp1.packageType().equals(item2))
                   {
-                    items.set(j,
-                              new ManyPackages(
-                                               (com.farevee.groceries.Package) item2,
-                                               ((ManyPackages) item1).count() + 1));
-                    items.remove(i);
-                    i--;
+                    mp1.addPackage(1);
+                    len = replace(j);
                   } // if item2 is a Package of the same type as item1
                 if ((item2 instanceof ManyPackages)
-                    && ((ManyPackages) item1).packageType()
-                                             .equals(((ManyPackages) item2).packageType()))
+                    && (mp1.packageType().equals(((ManyPackages) item2).packageType())))
                   {
                     ((ManyPackages) item2).addPackage(((ManyPackages) item1).count());
-                    items.remove(i);
-                    i--;
+                    len = replace(j);
                   } // if item1 and item2 are ManyPackages with the same type
               } // else if item1 is ManyPackages
             else if (item1 instanceof BulkItem
@@ -222,13 +243,12 @@ public class Cart
                      && ((BulkItem) item1).food()
                                           .equals(((BulkItem) item2).food()))
               {
-                items.set(j,
+                items.set(i,
                           new BulkItem(((BulkItem) item1).food(),
                                        ((BulkItem) item1).units(),
                                        ((BulkItem) item1).amount()
                                            + ((BulkItem) item2).amount()));
-                items.remove(i);
-                i--;
+                len = replace(j);
               } // else if item1 and item2 are a BulkItem of the same BulkFood
           } // for (item2)
       } // for (item1)

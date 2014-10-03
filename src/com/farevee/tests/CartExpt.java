@@ -35,22 +35,33 @@ public class CartExpt
     Item saffrons = new BulkContainer("jar", saffron, Units.GRAM, 2);
     
     myCart.addItem(bear);
+    myCart.addItem(someBananas);
     myCart.addItem(jello);
     myCart.addItem(jellos);
     myCart.addItem(someBananas);
     myCart.addItem(saffrons);
+    myCart.addItem(bear);
+    
+    pen.println("--------------------------------");
     myCart.printContents(pen);
+    pen.println("--------------------------------");
     
     pen.println("Number of things: " + myCart.numThings());
     pen.println("Number of entries: " + myCart.numEntries());
     pen.println("Total Price: " + myCart.getPrice());
+    pen.println();
     
+    pen.println("MERGING AND REMOVE BEARS!");
     myCart.merge();
+    myCart.remove("Teddy bear");
+    pen.println("--------------------------------");
     myCart.printContents(pen);
+    pen.println("--------------------------------");
     pen.println("Number of things: " + myCart.numThings());
-    
+    pen.println("Number of entries: " + myCart.numEntries());
     Weight[] weights = myCart.getWeight();
     
+    pen.println("Weights:");
     for (int i = 0; i < weights.length; i++)
       {
         pen.println(weights[i].toString());
