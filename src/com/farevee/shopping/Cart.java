@@ -41,7 +41,7 @@ public class Cart
   // +---------+  
 
   /**
-   * Remove the jth item in the card, putting the last value in 
+   * Remove the jth item in the cart, putting the last value in 
    * position j.  Return the new length.
    */
   int replace(int j)
